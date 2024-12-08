@@ -17,7 +17,9 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-
+      - name: Install Python3 virtualenv 
+      - run: sudo apt-get install -y python3-venv
+      
       - name: Create and start virtual environment
         run: |
           python3 -m venv venv
