@@ -41,5 +41,6 @@ def add_book():
         return redirect(url_for('home'))
     return render_template('add_book.html')
 
+# Forcer un nouveau déploiement avec un changement mineur
 if __name__ == '__main__':
     app.run(debug=True)
