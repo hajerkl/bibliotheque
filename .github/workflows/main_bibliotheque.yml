@@ -17,9 +17,10 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Install Python3 virtualenv 
-      - run: sudo apt-get install -y python3-venv
-      
+
+      - name: Install Python3 virtualenv
+        run: sudo apt-get install -y python3-venv
+
       - name: Create and start virtual environment
         run: |
           python3 -m venv venv
@@ -66,7 +67,7 @@ jobs:
           tenant-id: AZUREAPPSERVICE_TENANTID_28074573E2CA4BF48E89C10C83399416
           subscription-id: AZUREAPPSERVICE_SUBSCRIPTIONID_AD7317159E8647CC85E0A41F77E376CF
 
-      - name: 'Deploy to Azure Web App'
+      - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v3
         id: deploy-to-webapp
         with:
