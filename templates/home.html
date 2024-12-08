@@ -1,0 +1,18 @@
+<!doctype html>
+<html>
+<head>
+    <title>Library Home</title>
+</head>
+<body>
+    <h1>Library Home</h1>
+    <h2>Books Available</h2>
+    <ul>
+        {% for book in books %}
+        <li>
+            <strong>{{ book.title }}</strong> by {{ book.author }} - <a href="{{ book.file_url }}">Download</a>
+        </li>
+        {% endfor %}
+    </ul>
+    <a href="/add">Add a new book</a>
+</body>
+</html>
