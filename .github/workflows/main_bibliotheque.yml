@@ -12,7 +12,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
 
     steps:
       - uses: actions/checkout@v4
@@ -28,12 +28,15 @@ jobs:
           source venv/bin/activate
       
       - name: Install dependencies
-        run: pip install -r requirements.txt
+        run: |
+          source venv/bin/activate
+          pip install -r requirements.txt
         
       # Optional: Add step to run tests here (PyTest, Django test suites, etc.)
 
       - name: Zip artifact for deployment
-        run: zip release.zip ./* -r
+        run: |
+          zip -r release.zip ./* -x venv/\*
 
       - name: Upload artifact for deployment jobs
         uses: actions/upload-artifact@v4
@@ -41,10 +44,9 @@ jobs:
           name: python-app
           path: |
             release.zip
-            !venv/
 
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     needs: build
     environment:
       name: 'Production'
@@ -61,13 +63,10 @@ jobs:
       - name: Unzip artifact for deployment
         run: unzip release.zip
 
-      
       - name: Login to Azure
         uses: azure/login@v2
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_C80465716F1A45CBAE12C1F1C86C2478 }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_28074573E2CA4BF48E89C10C83399416 }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_AD7317159E8647CC85E0A41F77E376CF }}
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
 
       - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v3
@@ -75,4 +74,3 @@ jobs:
         with:
           app-name: 'bibliotheque'
           slot-name: 'Production'
-          
