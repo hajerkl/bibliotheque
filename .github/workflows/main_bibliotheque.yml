@@ -18,10 +18,20 @@ jobs:
         with:
           python-version: '3.12'
 
+      - name: Verify Python installation
+        run: |
+          python3 --version
+          which python3
+
       - name: Create and start virtual environment
         run: |
           python3 -m venv venv
-          source venv/bin/activate
+          if [ -f venv/bin/activate ]; then
+            source venv/bin/activate
+          else
+            echo "Failed to create virtual environment"
+            exit 1
+          fi
 
       - name: Install dependencies
         run: |
