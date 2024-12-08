@@ -20,12 +20,12 @@ jobs:
 
       - name: Create and start virtual environment
         run: |
-          python3 -m venv /Users/apple/my_flask_app/venv
-          source /Users/apple/my_flask_app/venv/bin/activate
+          python3 -m venv venv
+          source venv/bin/activate
 
       - name: Install dependencies
         run: |
-          source /Users/apple/my_flask_app/venv/bin/activate
+          source venv/bin/activate
           pip install -r requirements.txt
 
       - name: Zip artifact for deployment
