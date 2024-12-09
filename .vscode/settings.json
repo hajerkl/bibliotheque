@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/74fa9e53-6e92-416a-adb2-98437f1395c0/resourceGroups/livres/providers/Microsoft.Web/sites/bibliotheque",
+    "appService.deploySubpath": "."
+}
