@@ -10,9 +10,13 @@ container_name = "librarycontainer"
 
 container_client = blob_service_client.get_container_client(container_name)
 try:
-    container_client.create_container()
+    if not container_client.exists():
+        container_client.create_container()
+        print(f"Container {container_name} created.")
+    else:
+        print(f"Container {container_name} already exists.")
 except Exception as e:
-    print(f"Container {container_name} already exists or could not be created: {e}")
+    print(f"Error creating or accessing the container: {e}")
 
 books = []
 
