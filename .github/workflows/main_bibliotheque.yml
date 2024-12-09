@@ -41,6 +41,8 @@ jobs:
     environment:
       name: 'Production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+    permissions:
+      id-token: write  # Ajoute cette ligne pour donner les permissions au jeton d'identité
 
     steps:
       - name: Download artifact from build job
